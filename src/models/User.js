@@ -23,8 +23,8 @@ userSchema.virtual('initials').get(function () {
 })
 
 userSchema.pre('save', async function () {
-	if (this.isModified(this.password)) {
-		this.password	= await bcrypt.hash(this.password, process.env.SALT_ROUNDS)
+	if (this.isModified('password')) {
+		this.password	= await bcrypt.hash(this.password, parseInt(process.env.SALT_ROUNDS))
 	}
 })
 
